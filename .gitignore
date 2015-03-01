@@ -1,4 +1,2 @@
-node_modules/
-test/config.js
-.project
-
+coverage
+node_modules

@@ -1,14 +1,15 @@
-language: node_js
+env:
+  COMPOSE_VERSION: 1.4.0
 
-node_js:
-  - "0.10"
-  - "0.12"
-  - "iojs"
+install:
+  - curl -L https://github.com/docker/compose/releases/download/${COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+  - chmod +x docker-compose
+  - sudo mv docker-compose /usr/local/bin
 
-before_install:
-  - sudo add-apt-repository --yes ppa:bitcoin/bitcoin
-  - sudo apt-get update
-  - sudo apt-get install bitcoind
+script:
+  - docker-compose run --rm app
 
-after_install:
-  - git submodule update --init
+sudo: true
+
+services:
+  - docker
